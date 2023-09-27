@@ -1,6 +1,7 @@
 <?php
 namespace App\Data;
 namespace App\Entity;
+
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 
@@ -44,12 +45,25 @@ class Movie
 
     private Collection $reviews;
 
-    public function __construct()
+
+
+    public function __construct($movie)
     {
+        $this->id = $movie["id"];
+        $this->title = $movie["title"];
+        $this->image = $movie["poster_path"];
+        $this->video = $movie["video"];
+        $this->synopsis = $movie["overview"];
+        $this->language = $movie["original_language"];
+        $this->isAdult = $movie["adult"];
+        $this->releaseDate = $movie["release_date"];
+        $this->rating = $movie["vote_count"];
+        $this->director = null;
         $this->actors = new ArrayCollection();
         $this->themes = new ArrayCollection();
         $this->reviews = new ArrayCollection();
     }
+
 
 
     public function getActors(): Collection
