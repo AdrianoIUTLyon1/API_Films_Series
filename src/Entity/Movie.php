@@ -51,7 +51,7 @@ class Movie
     {
         $this->id = $movie["id"];
         $this->title = $movie["title"];
-        $this->image = $movie["poster_path"];
+        $this->image = 'https://image.tmdb.org/t/p/original' . $movie["poster_path"];
         $this->video = $movie["video"];
         $this->synopsis = $movie["overview"];
         $this->language = $movie["original_language"];

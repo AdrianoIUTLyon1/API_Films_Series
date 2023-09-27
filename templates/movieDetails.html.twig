@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+
+
+
+
+
+{% block body %}
+
+
+<div class="table-responsive small">
+  <table class="table table-striped table-sm">
+    <thead>
+      <tr>
+          <th scope="col">#</th>
+          <th scope="col">Header</th>
+          <th scope="col">Header</th>
+          <th scope="col">Header</th>
+          <th scope="col">Header</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><p class="movieTitle">{{movieDetails.title}}</p></td>
+        <td><img src='{{movieDetails.image}}' class="moviePicture"/></td>
+        <td><p>{{movieDetails.video}}</p></td>
+        <td><p class="text-limited">{{movieDetails.synopsis}}</p></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+{% for catsDetail in catsDetails %}
+  <div class="table-responsive small">
+  <table class="table table-striped table-sm">
+    <thead>
+      <tr>
+          <th scope="col">#</th>
+          <th scope="col">Header</th>
+          <th scope="col">Header</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><p class="movieTitle">{{catsDetail.name}}</p></td>
+        <td><img src='{{catsDetail.image}}' class="moviePicture"/></td>
+        <td><p>{{catsDetail.genre}}</p></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+{% endfor %}
+{%endblock%}

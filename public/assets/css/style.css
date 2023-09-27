@@ -1,0 +1,15 @@
+.text-limited {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 250px;
+
+}
+
+.moviePicture {
+    height: 100px;
+}
+
+.movieTitle {
+    width: 100px;
+}
