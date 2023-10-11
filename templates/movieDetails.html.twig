@@ -15,7 +15,6 @@
           <th scope="col">Header</th>
           <th scope="col">Header</th>
           <th scope="col">Header</th>
-          <th scope="col">Header</th>
       </tr>
     </thead>
     <tbody>
@@ -29,7 +28,8 @@
   </table>
 </div>
 
-{% for catsDetail in catsDetails %}
+
+{% for castDetail in castDetails %}
   <div class="table-responsive small">
   <table class="table table-striped table-sm">
     <thead>
@@ -41,9 +41,31 @@
     </thead>
     <tbody>
       <tr>
-        <td><p class="movieTitle">{{catsDetail.name}}</p></td>
-        <td><img src='{{catsDetail.image}}' class="moviePicture"/></td>
-        <td><p>{{catsDetail.genre}}</p></td>
+        <td><p class="movieTitle">{{castDetail.name}}</p></td>
+        <td><img src='{{castDetail.image}}' class="moviePicture"/></td>
+        <td><p>{{castDetail.genre}}</p></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+{% endfor %}
+
+
+{% for reviewList in reviewLists %}
+  <div class="table-responsive small">
+  <table class="table table-striped table-sm">
+    <thead>
+      <tr>
+          <th scope="col">#</th>
+          <th scope="col">Header</th>
+          <th scope="col">Header</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><p>{{reviewList.username}}</p></td>
+        <td><p>{{reviewList.rating}}</p></td>
+        <td><p>{{reviewList.comment}}</p></td>
       </tr>
     </tbody>
   </table>

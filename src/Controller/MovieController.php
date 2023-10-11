@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Actor;
 use App\Entity\Movie;
+use App\Entity\Review;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpClient\HttpClient;
 use Symfony\Component\HttpFoundation\Response;
@@ -46,16 +47,27 @@ class MovieController extends AbstractController
         $movieDetails = new Movie($movie);
 
         $responseCast = $this->tmdbClient->request('GET', "/3/movie/{$id}/credits");
-        $cast = $responseCast->toArray()['cast'];
+        $casts = $responseCast->toArray()['cast'];
+        $nbActeur = sizeof($casts);
         $castList = [];
-        for ($i = 0; $i < sizeof($cast); $i++) {
-            $cast = new Actor($cast[$i]);
+        for ($i = 0; $i < $nbActeur ; $i++) {
+            $cast = new Actor($casts[$i]);
             $castList[] = $cast;
+        }
+
+        $responseReview = $this->tmdbClient->request('GET',"/3/movie/{$id}/reviews");
+        $reviews = $responseReview->toArray()['results'];
+        $reviewList = [];
+
+        for ($i = 0; $i < sizeof($reviews) ; $i++) {
+            $review = new Review($reviews[$i]);
+            $reviewList[] = $review;
         }
 
         return $this->render('movieDetails.html.twig', [
             'movieDetails' => $movieDetails,
-            'castDetails' => $castList
+            'castDetails' => $castList,
+            'reviewLists' => $reviewList
         ]);
     }
 }

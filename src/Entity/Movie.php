@@ -17,7 +17,9 @@ class Movie
     private $title;
 
 
-    private $image;
+    private $imagePoster;
+
+    private $imageBanner;
 
 
     private $video;
@@ -51,7 +53,8 @@ class Movie
     {
         $this->id = $movie["id"];
         $this->title = $movie["title"];
-        $this->image = 'https://image.tmdb.org/t/p/original' . $movie["poster_path"];
+        $this->imagePoster = 'https://image.tmdb.org/t/p/original' . $movie["poster_path"];
+        $this->imageBanner = 'https://image.tmdb.org/t/p/original' . $movie["backdrop_path"];
         $this->video = $movie["video"];
         $this->synopsis = $movie["overview"];
         $this->language = $movie["original_language"];
@@ -136,14 +139,26 @@ class Movie
         return $this;
     }
 
-    public function getImage(): ?string
+    public function getImageBanner(): ?string
     {
-        return $this->image;
+        return $this->imageBanner;
     }
 
-    public function setImage(string $image): self
+    public function setImageBanner(string $imageBanner): self
     {
-        $this->image = $image;
+        $this->imagePoster = $imageBanner;
+
+        return $this;
+    }
+
+    public function getImagePoster(): ?string
+    {
+        return $this->imagePoster;
+    }
+
+    public function setImagePoster(string $imagePoster): self
+    {
+        $this->imagePoster = $imagePoster;
 
         return $this;
     }

@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 
+
 class Review
 {
     
@@ -16,6 +17,17 @@ class Review
 
     
     private $username;
+
+
+
+    
+    public function __construct($review)
+    {
+        $this->id = $review["id"];
+        $this->rating = $review["author_details"]["rating"];
+        $this->comment = $review["content"];
+        $this->username = $review["author_details"]["username"];
+    }
 
     public function getId(): ?int
     {
