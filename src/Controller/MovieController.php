@@ -64,6 +64,8 @@ class MovieController extends AbstractController
             $reviewList[] = $review;
         }
 
+        
+
         return $this->render('movieDetails.html.twig', [
             'movieDetails' => $movieDetails,
             'castDetails' => $castList,
