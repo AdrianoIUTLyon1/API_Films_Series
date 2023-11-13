@@ -14,7 +14,7 @@ class Favorite
     private ?int $id = null;
 
     #[ORM\Column(length: 255, nullable: true)]
-    private ?string $idFavoriteMovie = null;
+    private ?string $idmovie = null;
 
     public function getId(): ?int
     {
@@ -30,12 +30,12 @@ class Favorite
 
     public function getIdFavoriteMovie(): ?string
     {
-        return $this->idFavoriteMovie;
+        return $this->idmovie;
     }
 
-    public function setIdFavoriteMovie(?string $idFavoriteMovie): static
+    public function setIdFavoriteMovie(?string $idmovie): static
     {
-        $this->idFavoriteMovie = $idFavoriteMovie;
+        $this->idmovie = $idmovie;
 
         return $this;
     }

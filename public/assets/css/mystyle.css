@@ -4,10 +4,10 @@
     text-overflow: ellipsis;
 }
 
-.moviePicture {
-    height: 100px;
+.moviePicture, .seriePicture {
+    height: 600px;
 }
 
-.movieTitle {
+.movieTitle, .serieTitle {
     width: 100px;
 }

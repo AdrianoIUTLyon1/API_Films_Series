@@ -22,34 +22,7 @@ class FavoriteController extends AbstractController
 
     }
 
-
-
-    #[Route('/all')]
-    public function getFavoriteMovies(EntityManagerInterface $entityManager): Response
-    {
-
-        $favoriteRepository = $entityManager->getRepository(Favorite::class);
-        $favorites = $favoriteRepository->findAll();
-        $response = $this->tmdbClient->request('GET', '/3/movie/popular');
-        $movies = $response->toArray()['results'];
-        $movieFavoriteList = [];
-        for ($i = 0; $i < sizeof($movies); $i++) {
-            foreach ($favorites as $favorite) {
-                if($movies[$i]['id']==$favorite['idFavoriteMovie']){
-                    $movie = new Movie($movies[$i]);
-                    $movieFavoriteList[] = $movie;
-                }
-                
-            }
-           
-        }
-        return $this->render('movies.html.twig', [
-            'movies' => $movieFavoriteList
-        ]);
-    }
-
-
-    #[Route('/add-favorite')]
+    #[Route('/add-favorite/{idMovie}', name: 'addFav')]
     public function saveFavorite(EntityManagerInterface $entityManager, $idMovie): Response
     {
         $favorite = new Favorite();
@@ -58,8 +31,9 @@ class FavoriteController extends AbstractController
 
         // actually executes the queries (i.e. the INSERT query)
         $entityManager->flush();
+    
 
-        return $this->render('movieDetails.html.twig');
+        return $this->render('movies.html.twig');
     }
 
 

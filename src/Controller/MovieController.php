@@ -21,7 +21,7 @@ class MovieController extends AbstractController
     }
 
 
-    #[Route('/all')]
+    #[Route('/all', name: 'movie_all')]
     public function getMovies(): Response
     {
 
@@ -38,7 +38,7 @@ class MovieController extends AbstractController
     }
 
 
-    #[Route('/{id}')]
+    #[Route('/{id}', name:'detailsmovie')]
     public function getMovie(int $id): Response
     {
 

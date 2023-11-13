@@ -1,45 +1,100 @@
 <?php
-
 namespace App\Entity;
 
-
-
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 
 class Serie
 {
-
     private $id;
-
-    private $nom;
-
-
-    private $nbSaison;
-
-
-    private $nbEpisode;
-
-    private $nbNotes;
-
-
-    private $langues;
-
-
-    private $paysOrigine;
-
-
-    private $image;
-
-
-    private $realisateurs;
-
-
-    private $dateParution;
-
-
-    private $statut;
-
-
+    private $title;
+    private $imagePoster;
+    private $imageBanner;
+    private $video;
+    private $synopsis;
+    private $language;
     private $isAdult;
+    private $releaseDate;
+    private $rating;
+    private $director; 
+    private Collection $actors; 
+    private Collection $themes;
+    private Collection $reviews;
+
+    public function __construct($serie) 
+    {
+        $this->id = $serie["id"];
+        $this->title = $serie["name"];
+        $this->imagePoster = 'https://image.tmdb.org/t/p/original' . $serie["poster_path"];
+        $this->imageBanner = 'https://image.tmdb.org/t/p/original' . $serie["backdrop_path"];
+        $this->synopsis = $serie["overview"];
+        $this->language = $serie["original_language"];
+        $this->isAdult = $serie["adult"];
+        $this->releaseDate = $serie["first_air_date"];
+        $this->rating = $serie["vote_count"];
+        $this->director = null;
+        $this->actors = new ArrayCollection();
+        $this->themes = new ArrayCollection();
+        $this->reviews = new ArrayCollection();
+    }
+
+
+
+
+
+
+
+    public function getActors(): Collection
+    {
+        return $this->actors;
+    }
+
+    public function addActor(Actor $actor): self
+    {
+        if (!$this->actors->contains($actor)) {
+            $this->actors[] = $actor;
+        }
+
+        return $this;
+    }
+
+    public function removeActor(Actor $actor): self
+    {
+        if ($this->actors->contains($actor)) {
+            $this->actors->removeElement($actor);
+        }
+
+        return $this;
+    }
+
+
+    public function getThemes(): Collection
+    {
+        return $this->themes;
+    }
+
+    public function addTheme(Theme $theme): self
+    {
+        if (!$this->themes->contains($theme)) {
+            $this->themes[] = $theme;
+        }
+
+        return $this;
+    }
+
+    public function removeTheme(Theme $theme): self
+    {
+        if ($this->themes->contains($theme)) {
+            $this->themes->removeElement($theme);
+        }
+
+        return $this;
+    }
+
+    public function getReviews(): Collection
+    {
+        return $this->reviews;
+    }
 
 
     public function getId(): ?int
@@ -47,122 +102,62 @@ class Serie
         return $this->id;
     }
 
-    public function getNom(): ?string
+    public function getTitle(): ?string
     {
-        return $this->nom;
+        return $this->title;
     }
 
-    public function setNom(string $nom): self
+    public function setTitle(string $title): self
     {
-        $this->nom = $nom;
+        $this->title = $title;
 
         return $this;
     }
 
-    public function getNbSaison(): ?int
+    public function getImageBanner(): ?string
     {
-        return $this->nbSaison;
+        return $this->imageBanner;
     }
 
-    public function setNbSaison(int $nbSaison): self
+    public function setImageBanner(string $imageBanner): self
     {
-        $this->nbSaison = $nbSaison;
+        $this->imagePoster = $imageBanner;
 
         return $this;
     }
 
-    public function getNbEpisode(): ?int
+    public function getImagePoster(): ?string
     {
-        return $this->nbEpisode;
+        return $this->imagePoster;
     }
 
-    public function setNbEpisode(int $nbEpisode): self
+    public function setImagePoster(string $imagePoster): self
     {
-        $this->nbEpisode = $nbEpisode;
+        $this->imagePoster = $imagePoster;
 
         return $this;
     }
 
-    public function getNbNotes(): ?int
+    public function getSynopsis(): ?string
     {
-        return $this->nbNotes;
+        return $this->synopsis;
     }
 
-    public function setNbNotes(int $nbNotes): self
+    public function setSynopsis(string $synopsis): self
     {
-        $this->nbNotes = $nbNotes;
+        $this->synopsis = $synopsis;
 
         return $this;
     }
 
-    public function getLangues(): ?string
+    public function getLanguage(): ?string
     {
-        return $this->langues;
+        return $this->language;
     }
 
-    public function setLangues(string $langues): self
+    public function setLanguage(string $language): self
     {
-        $this->langues = $langues;
-
-        return $this;
-    }
-
-    public function getPaysOrigine(): ?string
-    {
-        return $this->paysOrigine;
-    }
-
-    public function setPaysOrigine(string $paysOrigine): self
-    {
-        $this->paysOrigine = $paysOrigine;
-
-        return $this;
-    }
-
-    public function getImage(): ?string
-    {
-        return $this->image;
-    }
-
-    public function setImage(string $image): self
-    {
-        $this->image = $image;
-
-        return $this;
-    }
-
-    public function getRealisateurs(): ?string
-    {
-        return $this->realisateurs;
-    }
-
-    public function setRealisateurs(string $realisateurs): self
-    {
-        $this->realisateurs = $realisateurs;
-
-        return $this;
-    }
-
-    public function getDateParution(): ?\DateTimeInterface
-    {
-        return $this->dateParution;
-    }
-
-    public function setDateParution(\DateTimeInterface $dateParution): self
-    {
-        $this->dateParution = $dateParution;
-
-        return $this;
-    }
-
-    public function getStatut(): ?string
-    {
-        return $this->statut;
-    }
-
-    public function setStatut(string $statut): self
-    {
-        $this->statut = $statut;
+        $this->language = $language;
 
         return $this;
     }
@@ -175,6 +170,42 @@ class Serie
     public function setIsAdult(bool $isAdult): self
     {
         $this->isAdult = $isAdult;
+
+        return $this;
+    }
+
+    public function getReleaseDate(): ?\DateTimeInterface
+    {
+        return $this->releaseDate;
+    }
+
+    public function setReleaseDate(\DateTimeInterface $releaseDate): self
+    {
+        $this->releaseDate = $releaseDate;
+
+        return $this;
+    }
+
+    public function getRating(): ?float
+    {
+        return $this->rating;
+    }
+
+    public function setRating(float $rating): self
+    {
+        $this->rating = $rating;
+
+        return $this;
+    }
+
+    public function getDirector(): ?string
+    {
+        return $this->director;
+    }
+
+    public function setDirector(string $director): self
+    {
+        $this->director = $director;
 
         return $this;
     }
